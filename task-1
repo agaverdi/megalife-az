@@ -1,0 +1,33 @@
+<?php
+class Solution {
+    
+    
+    function combinationSum(array $candidates, int $target) {
+        $result = [];
+         $this->hesablama($result,[],$candidates,$target,0);
+         return $result;
+    }
+    
+    
+    function hesablama(&$result,$current,$candidates,$target_azalan,$baslangic)
+    {
+        if($target_azalan==0)
+        {
+            $result[]=$current;
+            return; 
+        }
+        for($i=$baslangic;$i < count($candidates);$i++)
+        {
+            if($candidates[$i]>$target_azalan){
+                continue;
+            }
+            $this->hesablama($result,array_merge($current,[$candidates[$i]]),$candidates, $target_azalan-$candidates[$i],$i);
+        }
+    }
+}
+    $solution = new Solution();
+    $combinations = $solution->combinationSum([2, 3, 6, 7], 7);
+
+    print_r($combinations);
+
+?>
